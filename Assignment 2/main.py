@@ -13,6 +13,7 @@ b =0
 A=0
 B=0
 C=0
+D=0
 p=0
 p_recomb =0
 p_mutatie =0
@@ -29,7 +30,7 @@ individ_cu_fitness_maxim_din_populatia_curenta = []
 
 # Parseaza input-ul din input.txt.
 def parse_input():
-    global n, N, a, b, A, B, C, p, p_recomb, p_mutatie, elitist, tip_mutatie, best_fitness, fittest, probabilitati_selectie, y
+    global n, N, a, b, A, B, C,D, p, p_recomb, p_mutatie, elitist, tip_mutatie, best_fitness, fittest, probabilitati_selectie, y
     f = open("input.txt", "r")
     n=int(f.readline())
     a=float(f.readline())
@@ -37,6 +38,7 @@ def parse_input():
     A=float(f.readline())
     B=float(f.readline())
     C=float(f.readline())
+    D=float(f.readline())
     p=float(f.readline())
     p_recomb=float(f.readline())
     p_mutatie=float(f.readline())
@@ -114,11 +116,11 @@ def base_2_to_base_10(individ):
 # Calculeaza fitness-ul unui individ.
 def fitness(individ):
     x = base_2_to_base_10(individ)
-    return A*pow(x, 2)+B*x + C
+    return A*pow(x, 3)+B*pow(x,2) + C*x + D
 
 # Aplica functia f pe un numar.
 def f(x):
-    return A*pow(x, 2)+B*x + C
+    return A*pow(x, 3)+B*pow(x,2) + C*x + D
 
 # Cauta intr-o lista list locul lui x prin cautare binara.
 def cautare_interval(list, x, left, right):
@@ -337,8 +339,20 @@ def recombinare():
             individ1_recombinat = bucata11 + bucata22
             individ2_recombinat = bucata21 + bucata12
 
-            populatie_recombinata.append(individ1_recombinat)
-            populatie_recombinata.append(individ2_recombinat)
+            list = [individ1, individ2, individ1_recombinat, individ2_recombinat]
+
+            print(f"La recombinare am generat indivizii: \n {individ1} cu  {fitness(individ1)}"
+                  f"\n{individ2} cu {fitness(individ2)}"
+                  f"\n{individ1_recombinat} cu {fitness(individ1_recombinat)}"
+                  f"\n {individ2_recombinat} cu {fitness(individ2_recombinat)}")
+
+            list = sorted(list, key=lambda x : fitness(x), reverse=True)
+
+            print(f"S-au ales: {list[0]} cu {fitness(list[0])}\n"
+                  f"{list[1]} cu {fitness(list[1])}")
+
+            populatie_recombinata.append(list[0])
+            populatie_recombinata.append(list[1])
 
             if y == 1:
                 g.write("Noii indivizi sunt: \n")
@@ -434,14 +448,14 @@ def plot():
 
 
     plt.subplot(1, 2, 1)
-    plt.scatter(Ox1, Oy1)
+    plt.scatter(Ox1, Oy1, alpha=0.5)
     plt.xlabel("individuals from current population")
     plt.ylabel("fitness of individuals from current population")
     plt.subplots_adjust(wspace = 1)
 
 
     plt.subplot(1, 2, 2)
-    plt.scatter(Ox2, Oy2)
+    plt.scatter(Ox2, Oy2, alpha=0.5)
     plt.xlabel("fittest individuals across population")
     plt.ylabel("fitness of fittest individuals across populations")
 
@@ -453,7 +467,7 @@ def plot():
 
 def evolutia_maximului():
     g.write("\nEvolutia maximului:\n")
-    valori = [f(x) for x in fit_values]
+    valori = [(x, f(x)) for x in fit_values]
     for value in valori:
         g.write(f"{value}\n")
 
