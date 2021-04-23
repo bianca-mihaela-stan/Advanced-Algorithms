@@ -74,11 +74,15 @@ def poz_relativ_la_polign(query, frontiera_inferioara, frontiera_superioara):
 
         test_frontiera_superioara = test_de_orientare(frontiera_superioara[stanga], frontiera_superioara[dreapta], query)
 
+        # Daca iese inside si la al doilea chiar e inside.
         if test_frontiera_superioara == 2:
             g.write("inside\n")
+        # Daca iese coliniar trebuie sa ma uit daca e intre sau in afara.
         elif test_frontiera_superioara == 0:
             if frontiera_superioara[stanga][0] <= query[0] <= frontiera_superioara[dreapta][0]:
                 g.write("on edge\n")
+            else:
+                g.write("outside\n")
         else:
             g.write("outside\n")
 
