@@ -1,0 +1,12 @@
+In patrulaterul ABCD ([7.0, 3.0], [5.0, 5.0], [3.0, 3.0], [4.0, 2.0]):
+muchia AC ([7.0, 3.0], [3.0, 3.0]) este ilegala
+muchia AC ([7.0, 3.0], [3.0, 3.0]) este legala
+
+In patrulaterul ABCD ([7.0, 3.0], [5.0, 5.0], [3.0, 3.0], [5.0, 1.0]):
+muchia AC ([7.0, 3.0], [3.0, 3.0]) este legala
+muchia BD ([5.0, 5.0], [5.0, 1.0]) este legala
+
+In patrulaterul ABCD ([7.0, 3.0], [5.0, 5.0], [3.0, 3.0], [7.0, 1.0]):
+muchia AC ([7.0, 3.0], [3.0, 3.0]) este legala
+muchia BD ([5.0, 5.0], [7.0, 1.0]) este ilegala
+
