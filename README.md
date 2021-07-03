@@ -11,3 +11,9 @@
 <p>
 <img src="Assignment 2/genetic_algorithm_graphs.gif" width=75%>
 </p>
+
+#### <a href = https://github.com/stanbianca/Advanced-Algorithms/tree/main/Assignment%203>Assignment 3: computational geometry algorithms</a>
+- Graham's scan
+- Jarvis' march
+- triangulation
+- Voronoi diagrams
